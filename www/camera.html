@@ -16,9 +16,9 @@
 
                 img = document.getElementById("sample");
                 worker
-                    .recognize(img, 'deu',
+                    .recognize(img, 'digits_comma',
                         {
-                            tessedit_ocr_engine_mode: OEM.OEM_TESSERACT_LSTM_COMBINED,
+                            tessedit_ocr_engine_mode: OEM.OEM_LSTM_ONLY,
                             tessedit_pageseg_mode: PSM.PSM_SINGLE_COLUMN
                         }
                     )
@@ -39,7 +39,7 @@
         </script>
     </head>
     <body>
-        <img id="sample" src="sample3.jpg" />
+        <img id="sample" src="images/sample5.jpg" />
         <p id="status">
             status
         </p>
