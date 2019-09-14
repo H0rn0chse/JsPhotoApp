@@ -47,12 +47,8 @@
         else elem.src = URL.createObjectURL(stream);
         elem.onloadedmetadata = function(e) {
             var canvas = document.getElementById("photo-take-cache");
-
-            ratio = elem.videoWidth/elem.videoHeight;
-            w = elem.videoWidth-100;
-            h = parseInt(w/ratio,10);
-            canvas.width = w;
-            canvas.height = h;
+            canvas.width = elem.videoWidth;
+            canvas.height = elem.videoHeight;
             elem.play();
         };
     }
@@ -65,7 +61,7 @@
 
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
-        console.log(photo);
+        
         $(".photo-display").css("background-image", "url("+photo+")");
 
         $("body").addClass("has-taken-photo");
