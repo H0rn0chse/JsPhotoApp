@@ -1,7 +1,8 @@
 
 (function() {
 
-
+    window.appState = window.appState | {};
+    window.appState.hasTakenPhoto = window.hasTakenPhoto | false;
 
     function checkCompatibility(elem) {
 
@@ -33,7 +34,7 @@
         }
 
         if (navigator.mediaDevices.getUserMedia) {
-            var constraints = { audio: false, video: { width: 1280, height: 720 } };
+            var constraints = { audio: false, video: true };
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) { isCompatibleThen(elem, stream) })
                 .catch(function(err) { isNotCompatibleThen(elem, err) });
@@ -42,24 +43,30 @@
 
     function isCompatibleThen(elem, stream) {
         $("body").addClass("is-compatible");
-        // Older browsers may not have srcObject
-        if ("srcObject" in elem) {
-            elem.srcObject = stream;
-        } else {
-            // Avoid using this in new browsers, as it is going away.
-            elem.src = URL.createObjectURL(stream);
-        }
+        if ("srcObject" in elem) elem.srcObject = stream;
+        else elem.src = URL.createObjectURL(stream);
         elem.onloadedmetadata = function(e) { elem.play(); };
     }
     function isNotCompatibleThen(elem, err) {
         $("body").addClass("is-not-compatible");
     }
 
+    function takePhoto(img, canvas) {
+        alert($(img).width());
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        var photo = canvas.toDataURL("image/png");
+        window.photo = photo;
+        $(".photo-display").css("background-image", "url("+photo+")");
+
+        $("body").addClass("has-taken-photo");
+    }
 
     $(document).ready(function() {
-        checkCompatibility($("#photo-live-display")[0]);
-
-
+        checkCompatibility($("#video-live-display")[0]);
+        $("#photo-take").click(function(){
+            takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
+        });
     });
 
 })()

@@ -8,6 +8,33 @@ body.is-compatible {
     //box-shadow: inset 0 0 15px #090;
 }
 
-video.photo-canvas {
-    object-fit: cover; // Cuts off!
+.photo-area, .video-display {
+    height: 100%;
+    width: 100%;
+}
+
+video.video-display {
+    //object-fit: cover; // Cuts off!
+}
+
+canvas.photo-canvas {
+    //display: none;
+    height: 100%;
+    width: 100%;
+}
+
+.photo-display {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+
+
+    //background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+body.has-taken-photo .photo-display {
+    display: block;
 }

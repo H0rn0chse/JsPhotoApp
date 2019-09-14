@@ -20,16 +20,18 @@
 
         <div class="wrapper">
             <div class="photo-area">
-                <video autoplay="true" class="photo-canvas" id="photo-live-display">
-
-                </video>
+                <video autoplay="true" class="video-display" id="video-live-display"></video>
+                <div class="photo-display"></div>
+                <canvas class="photo-canvas" id=photo-take-cache></canvas>
             </div>
             <div class="menu-area">
                 <div class="menu-area__main">
-                    <div class="btn btn--center btn--photo"></div>
+                    <div class="btn btn--center btn--photo" id="photo-take"></div>
                 </div>
                 <div class="menu-area__side menu-area__side--left">
-                    <div class="btn btn--center btn--achievements"></div>
+                    <div class="btn btn--center">
+                        
+                    </div>
                 </div>
                 <div class="menu-area__side menu-area__side--right">
                     <div class="btn btn--center btn--achievements"></div>
