@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently --names \"SASS,WATCH,SERVE\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold\"  \"npm run sass\" \"npm run sass:watch\" \"npm run serve\"",
     "serve": "node index.js",
-    "sass": "node-sass scss/index.scss --output  http_server/css --indent-width 4 --output-style expanded --indent-type space --source-map true",
+    "sass": "node-sass scss/index.scss --output  www/css --indent-width 4 --output-style expanded --indent-type space --source-map true",
     "sass:watch": "npm run sass -- --watch"
   },
   "repository": {

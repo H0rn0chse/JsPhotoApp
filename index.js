@@ -3,8 +3,8 @@ var fs = require('fs');
 var mime = require('mime-types');
 
 http.createServer(function (req, res) {
-    var path = "http_server" + req.url;
-    var fallbackPath = "http_server/fileNotFound.html";
+    var path = "www" + req.url;
+    var fallbackPath = "www/fileNotFound.html";
 
     var fileExists = fs.existsSync(path);
 
