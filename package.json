@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --coverage --forceExit"
+    "start": "concurrently --names \"SASS,WATCH,SERVE\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold\"  \"npm run sass\" \"npm run sass:watch\" \"npm run serve\"",
+    "serve": "node index.js",
+    "sass": "node-sass scss/index.scss --output  http_server/css --indent-width 4 --output-style expanded --indent-type space --source-map true",
+    "sass:watch": "npm run sass -- --watch"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,8 @@
   "homepage": "https://github.com/H0rn0chse/JsPhotoApp#readme",
   "dependencies": {
     "server": "^1.0.19"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0"
   }
 }
