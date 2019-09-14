@@ -2,14 +2,17 @@
 
 
 .btn {
+    position: relative;
     border-radius: $btn-size / 2;
     width: $btn-size;
     height: $btn-size;
+    text-align: center;
 
     $bg: transparentize($btn-base-color, 0.35);
     $border: lighten($bg, 10);
     $shadow: darken($bg, 80);
-    $shadow-height: $btn-size/10;
+    $icon: $shadow;
+    $shadow-height: $btn-size/12;
 
     background-color: $bg;
     border: 2px solid $border;
@@ -30,4 +33,22 @@
     &--photo {
         width: 2*$btn-size;
     }
+
+    &--icon {
+        .glyphicon {
+            color: $icon;
+            font-size: 3*$btn-size/4;
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            margin-left: -(3*$btn-size/4)/2;
+            margin-top: -(3*$btn-size/4)/2;
+
+        }
+    }
+
+
 }

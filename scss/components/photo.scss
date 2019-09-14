@@ -38,3 +38,15 @@ canvas.photo-canvas {
 body.has-taken-photo .photo-display {
     display: block;
 }
+
+.glyphicon.photo-icon-take,
+.glyphicon.photo-icon-back {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+.glyphicon.photo-icon-back {opacity: 0;}
+
+body.has-taken-photo {
+    & .glyphicon.photo-icon-take {opacity: 0;}
+    & .glyphicon.photo-icon-back {opacity: 1;}
+}
