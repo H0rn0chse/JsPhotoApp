@@ -1,0 +1,20 @@
+{
+  "name": "jsphotoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --coverage --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/H0rn0chse/JsPhotoApp.git"
+  },
+  "author": "Aaron Bruch, Angelo Aracri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/H0rn0chse/JsPhotoApp/issues"
+  },
+  "homepage": "https://github.com/H0rn0chse/JsPhotoApp#readme"
+}
