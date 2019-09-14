@@ -41,9 +41,7 @@
     }
 
     function isCompatibleThen(elem, stream) {
-        alert("compatible");
-
-
+        $("body").addClass("is-compatible");
         // Older browsers may not have srcObject
         if ("srcObject" in elem) {
             elem.srcObject = stream;
@@ -54,8 +52,7 @@
         elem.onloadedmetadata = function(e) { elem.play(); };
     }
     function isNotCompatibleThen(elem, err) {
-        $("body").addClass("not-compatible");
-        alert("Not compatible: " + err);
+        $("body").addClass("is-not-compatible");
     }
 
 

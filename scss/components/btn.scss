@@ -1,0 +1,33 @@
+
+
+
+.btn {
+    border-radius: $btn-size / 2;
+    width: $btn-size;
+    height: $btn-size;
+
+    $bg: transparentize($btn-base-color, 0.35);
+    $border: lighten($bg, 10);
+    $shadow: darken($bg, 80);
+    $shadow-height: $btn-size/10;
+
+    background-color: $bg;
+    border: 2px solid $border;
+    box-shadow: 0 $shadow-height 0 $shadow;
+
+    transition: transform 0.5s, box-shadow 0.5s;
+
+    transform: translateY(0);
+    &:active {
+        transform: translateY($shadow-height);
+        box-shadow: 0 0 0 $shadow;
+    }
+
+    &--center {
+        margin: auto;
+    }
+
+    &--photo {
+        width: 2*$btn-size;
+    }
+}
