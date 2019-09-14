@@ -1,4 +1,3 @@
-
 (function() {
 
 
@@ -60,10 +59,9 @@
 
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
+        TesseractWorker.loadImage(photo, function(p){console.log(p.status);}, function(obj){console.log(obj.text);});
 
         $(".photo-display").css("background-image", "url("+photo+")");
-
-
     }
 
     $(document).ready(function() {
