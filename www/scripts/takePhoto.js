@@ -1,8 +1,7 @@
 
 (function() {
 
-    window.appState = window.appState | {};
-    window.appState.hasTakenPhoto = window.hasTakenPhoto | false;
+
 
     function checkCompatibility(elem) {
 
@@ -61,16 +60,23 @@
 
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
-        
+
         $(".photo-display").css("background-image", "url("+photo+")");
 
-        $("body").addClass("has-taken-photo");
+
     }
 
     $(document).ready(function() {
         checkCompatibility($("#video-live-display")[0]);
         $("#photo-take").click(function(){
-            takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
+
+            if ($("body").hasClass("has-taken-photo")) {
+                
+            } else {
+                takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
+            }
+
+            $("body").toggleClass("has-taken-photo");
         });
     });
 
