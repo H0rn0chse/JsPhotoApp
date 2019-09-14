@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/H0rn0chse/JsPhotoApp/issues"
   },
-  "homepage": "https://github.com/H0rn0chse/JsPhotoApp#readme"
+  "homepage": "https://github.com/H0rn0chse/JsPhotoApp#readme",
+  "dependencies": {
+    "server": "^1.0.19"
+  }
 }
