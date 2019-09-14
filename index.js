@@ -1,23 +1,31 @@
 var http = require('http');
 var fs = require('fs');
+var mime = require('mime-types');
 
 http.createServer(function (req, res) {
+    var path = "http_server" + req.url;
+    var fallbackPath = "http_server/fileNotFound.html";
 
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    var path = "http_server/" + req.url;
+    var fileExists = fs.existsSync(path);
 
-    var exists = fs.existsSync(path);
-
-    if (exists) {
+    if (fileExists) {
+        //redirect to index.html
         var isDir = fs.lstatSync(path).isDirectory();
         if (isDir) {
-            path = path + "/" + "index.html";
+            path = path + "/index.html";
+            fileExists = fs.existsSync(path);
         }
-
-        var index = fs.readFileSync(path);
-    } else {
-        var index = fs.readFileSync("http_server/fileNotFound.html");
     }
+    path = fileExists ? path : fallbackPath;
+
+    var index = fs.readFileSync(path);
+
+    var contentType = mime.lookup(path);
+    if (contentType === false) {
+        contentType = "text/plain";
+    }
+
+    res.writeHead(200, {'Content-Type': contentType});
 
     res.end(index);
 }).listen(3000);

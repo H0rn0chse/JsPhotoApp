@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/H0rn0chse/JsPhotoApp#readme",
   "dependencies": {
+    "mime-types": "^2.1.24",
     "server": "^1.0.19"
   },
   "devDependencies": {
+    "concurrently": "^4.1.2",
     "node-sass": "^4.12.0"
   }
 }
