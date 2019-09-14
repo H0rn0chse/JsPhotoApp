@@ -55,8 +55,16 @@
     }
 
     function takePhoto(img, canvas) {
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        var context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var imageData = context.getImageData(0,0,canvas.width, canvas.height);
 
+        imageData = CanvasHelper.grayscaleImage(imageData);
+        imageData = CanvasHelper.contrastImage(imageData, 50);
+
+        // overwrite original image
+        context.putImageData(imageData, 0, 0);
+        
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
         TesseractWorker.loadImage(photo, function(p){console.log(p.status);}, function(obj){console.log(obj.text);});
