@@ -1,3 +1,28 @@
-<link rel="stylesheet" href="./css/index.css">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
 
-index
+        <title>PhotoApp</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+        <script type="text/javascript" src="scripts/lib/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="scripts/takePhoto.js"></script>
+
+        <link rel="stylesheet" href="css/index.css" onload="console.log('LOADED')">
+    </head>
+    <body>
+
+        <div class="wrapper">
+            <div class="photo-area">
+                <video autoplay="true" class="photo-canvas" id="photo-live-display">
+
+                </video>
+            </div>
+            <div class="menu-area">
+
+            </div>
+        </div>
+    </body>
+</html>
