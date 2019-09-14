@@ -3,20 +3,21 @@ var fs = require('fs');
 
 http.createServer(function (req, res) {
 
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  var path = "http_server/" + req.url;
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    var path = "http_server/" + req.url;
 
-  var exists = fs.existsSync(path);
+    var exists = fs.existsSync(path);
 
-  if (exists) {
-      var isDir = fs.lstatSync(path).isDirectory();
-      var isFile = fs.lstatSync(path).isDirectory();
-      if (isDir) {
-          path = path + "/" + "index.html";
-      }
+    if (exists) {
+        var isDir = fs.lstatSync(path).isDirectory();
+        if (isDir) {
+            path = path + "/" + "index.html";
+        }
 
-      var index = fs.readFileSync(path);
-  }
+        var index = fs.readFileSync(path);
+    } else {
+        var index = fs.readFileSync("http_server/fileNotFound.html");
+    }
 
-  res.end(index);
+    res.end(index);
 }).listen(3000);
