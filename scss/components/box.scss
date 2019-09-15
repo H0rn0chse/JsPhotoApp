@@ -1,16 +1,32 @@
 
 *.box {
-    @extend .btn;
-    width: 70vw;
+
+    $bg: $btn-base-color;
+    $shadow: transparentize($btn-base-color, 0.5);
+    $shadow-height: $btn-size/12;
+
+    background-color: $bg;
+    border-radius: $btn-size / 2;
+
+    //width: 70vw;
+    min-width: $btn-size;
     height: auto; min-height: $btn-size;
 
+    padding: $btn-size / 2;
+
+    box-shadow: 0 0 0 22px $shadow;
+
+    font-family: "Verdana";
+    text-align: left;
+
     b {
+        display: none;
         line-height: 2;
         font-size: 1.6em;
     }
     p {
-        line-height: 0.9;
-        font-size: 1.1em;
+        line-height: 1.0;
+        font-size: 1.08em;
         margin-bottom: 1.1em;
 
     }
