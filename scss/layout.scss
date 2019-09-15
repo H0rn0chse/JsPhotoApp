@@ -28,3 +28,14 @@ html, body, .wrapper {
     }
 
 }
+
+.popup-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    .box--popup {
+        position: relative;
+        left: -50%;
+        top: -50%
+    }
+}

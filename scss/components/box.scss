@@ -1,0 +1,17 @@
+
+*.box {
+    @extend .btn;
+    width: 70vw;
+    height: auto; min-height: $btn-size;
+
+    b {
+        line-height: 2;
+        font-size: 1.6em;
+    }
+    p {
+        line-height: 0.9;
+        font-size: 1.1em;
+        margin-bottom: 1.1em;
+
+    }
+}
