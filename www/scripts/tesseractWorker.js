@@ -1,8 +1,8 @@
 var TesseractWorker = (function (tesseractWorker) {
-    
+
     const { TesseractWorker, OEM, PSM } = Tesseract;
     const worker = new TesseractWorker();
-    
+
     tesseractWorker.loadImage = function (img, progressCallback, finallyCallback) {
         worker
             //.recognize(img, 'digits_comma',
@@ -21,6 +21,10 @@ var TesseractWorker = (function (tesseractWorker) {
                     finallyCallback(obj);
                 });
     };
-  
+
+    tesseractWorker.stop = function () {
+        worker.terminate();
+    };
+
     return tesseractWorker;
   }(TesseractWorker || {}));
