@@ -8,6 +8,7 @@ html, body, .wrapper {
 
 .menu-area {
     position: absolute;
+    z-index: 101;
     bottom: 0;
     left: 0;
     right: 0;
@@ -27,15 +28,4 @@ html, body, .wrapper {
         &--right {right: 0}
     }
 
-}
-
-.popup-area {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    .box--popup {
-        position: relative;
-        left: -50%;
-        top: -50%
-    }
 }

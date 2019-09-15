@@ -64,11 +64,16 @@
 
         // overwrite original image
         context.putImageData(imageData, 0, 0);
-        
+
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
-        TesseractWorker.loadImage(photo, function(p){console.log(p.status);}, function(obj){console.log(obj.text);});
-
+        TesseractWorker.loadImage(photo, function(p){console.log(p.status);}, function(obj){
+            console.log(obj.text);
+            PopupControl($(".popup-area"))
+                .setTitleAndText("Texterkennung", obj.text)
+                .open();
+        });
+        
         $(".photo-display").css("background-image", "url("+photo+")");
     }
 
@@ -77,7 +82,7 @@
         $("#photo-take").click(function(){
 
             if ($("body").hasClass("has-taken-photo")) {
-                
+
             } else {
                 takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
             }

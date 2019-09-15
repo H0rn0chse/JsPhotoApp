@@ -1,0 +1,36 @@
+.popup-area {
+    opacity: 0;
+    //display: none;
+    transition: opacity 0.5s, display 0s 0.5s;
+
+    &.popup-area--open {
+        opacity: 1;
+        //display: block;
+        transition: opacity 0.49s 0.01, display 0s 0.0s;
+
+        .popup-container .box--popup {
+            transform: translate(0, 0);
+        }
+    }
+
+    .popup-area-bg {
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: 1000;
+    }
+    .popup-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1001;
+        transform: translate(-50%, -50%);
+
+
+        .box--popup {
+            //max-height: 80vh;
+            overflow-y: scroll;
+            //transform: translate(0, -200px);
+            //transition: transform 0.5s;
+        }
+    }
+}
