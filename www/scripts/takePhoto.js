@@ -32,7 +32,7 @@
         }
 
         if (navigator.mediaDevices.getUserMedia) {
-            var constraints = { audio: false, video: true };
+            var constraints = { audio: false, video: {facingMode: 'environment'}};
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) { isCompatibleThen(elem, stream) })
                 .catch(function(err) { isNotCompatibleThen(elem, err) });
@@ -60,7 +60,9 @@
         var imageData = context.getImageData(0,0,canvas.width, canvas.height);
 
         imageData = CanvasHelper.grayscaleImage(imageData);
+
         imageData = CanvasHelper.contrastImage(imageData, 50);
+        imageData = CanvasHelper.lightenImage(imageData, 50);
 
         // overwrite original image
         context.putImageData(imageData, 0, 0);
@@ -68,6 +70,7 @@
         var photo = canvas.toDataURL("image/png");
         window.photo = photo;
         TesseractWorker.loadImage(photo, function(p){console.log(p.status);}, function(obj){
+            console.log(obj);
             console.log(obj.text);
             PopupControl($(".popup-area"))
                 .setTitleAndText("Texterkennung", obj.text)
@@ -85,6 +88,7 @@
         $("#photo-take").click(function(){
 
             if ($("body").hasClass("has-taken-photo")) {
+                TesseractWorker.stop();
             } else {
                 takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
             }
