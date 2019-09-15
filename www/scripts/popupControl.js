@@ -10,6 +10,7 @@ var PopupControl = (function (popupControl) {
     }
 
     return function($popupArea) {
+        var onCloseHandler;
         popupControl.setTitleAndText = function (title, text) {
             $popupArea.find("b").text(title);
             $popupArea.find("p").html(nl2br(text));
@@ -24,8 +25,15 @@ var PopupControl = (function (popupControl) {
         }
         popupControl.close = function () {
             $popupArea.removeClass("popup-area--open");
+            if (onCloseHandler !== undefined) {
+                onCloseHandler();
+            }
             return popupControl;
         }
+        popupControl.onClose = function (handler) {
+            onCloseHandler = handler;
+        }
+
 
         return popupControl;
 

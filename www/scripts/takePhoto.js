@@ -71,9 +71,12 @@
             console.log(obj.text);
             PopupControl($(".popup-area"))
                 .setTitleAndText("Texterkennung", obj.text)
-                .open();
+                .open()
+                .onClose(function() {
+                    $("body").removeClass("has-taken-photo")
+                });
         });
-        
+
         $(".photo-display").css("background-image", "url("+photo+")");
     }
 
@@ -82,7 +85,6 @@
         $("#photo-take").click(function(){
 
             if ($("body").hasClass("has-taken-photo")) {
-
             } else {
                 takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
             }
