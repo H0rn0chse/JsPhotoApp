@@ -54,3 +54,10 @@ $w_min_dist: 8%;
 .has-taken-photo .loading-area {
     display: block;
 }
+
+@keyframes spin {
+    100% { transform:rotate(360deg); }
+}
+.photo-icon-load {
+    animation: spin 4s linear infinite;
+}

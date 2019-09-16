@@ -40,13 +40,19 @@ body.has-taken-photo .photo-display {
 }
 
 .glyphicon.photo-icon-take,
+.glyphicon.photo-icon-load,
 .glyphicon.photo-icon-back {
     opacity: 1;
     transition: opacity 0.5s;
 }
+.glyphicon.photo-icon-load,
 .glyphicon.photo-icon-back {opacity: 0;}
 
 body.has-taken-photo {
     & .glyphicon.photo-icon-take {opacity: 0;}
+    & .glyphicon.photo-icon-load {opacity: 1;}
+}
+body.has-taken-photo.done-processing {
+    & .glyphicon.photo-icon-load {opacity: 0;}
     & .glyphicon.photo-icon-back {opacity: 1;}
 }
