@@ -2,6 +2,19 @@
 $w_num: 74;
 $w_min_dist: 8%;
 
+
+@keyframes rainbow-colors {
+    @for $i from 0 to 100 {
+        #{$i}% {
+            $col: hsl($i/100.0*360deg, 100%, 50%);
+            color: $col;
+            text-shadow: $col 0 0 10px, $col 0 0 5px;
+        }
+    }
+
+}
+
+
 .loading-area {
     display: none;
 
@@ -12,6 +25,7 @@ $w_min_dist: 8%;
         height: 100%;
         width: 100%;
         & > .w {
+            animation: rainbow-colors 3s linear infinite;
             opacity: 0;
             transition: opacity 0.8s ease-in;
             position: absolute;
@@ -38,7 +52,6 @@ $w_min_dist: 8%;
             &.p-#{$p} {
                 @for $w from 1 to $w_num+1 {
                     & > .w:nth-child(#{$w}) {
-                        content: "#{$w}";
                         @if $w >= $cur_p_in_w_units and $w - 1 < $cur_p_in_w_units {
                             opacity: 1;
                         }
