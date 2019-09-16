@@ -47,10 +47,30 @@
     }
 
     function onProcessProgress(obj) {
-        if (obj.status === "recognizing text") {
-            var prog = Math.round(obj.progress * 100);
-            Loading.update(prog);
+        console.log(obj.status + ": " + obj.progress);
+
+        var stati = [
+            ["loading tesseract core", 0.1],
+            ["initializing tesseract", 0.1],
+            ["initialized tesseract", 0.1],
+            ["loading language traineddata", 0.1],
+            ["loaded language traineddata", 0.1],
+            ["initializing api", 0.1],
+            ["recognizing text", 0.4]
+        ];
+
+        prog = 0;
+        var s = 0;
+        for (s = 0; s < stati.length; s++) {
+            if (stati[s][0] === obj.status) {
+                break;
+            }
+            prog += stati[s][1];
         }
+
+        prog = Math.round(prog + stati[s][1] * obj.progress * 100);
+        Loading.update(prog);
+
     }
 
     function onProcessDone(obj) {
@@ -61,6 +81,7 @@
             .onClose(function() {
                 $("body").removeClass("has-taken-photo")
             });
+        $("body").addClass("done-processing");
     }
 
     function preprocessPhoto(imageData) {
@@ -73,6 +94,7 @@
     function onTakePhotoButtonClick() {
         if ($("body").hasClass("has-taken-photo")) {
             TesseractWorker.stop();
+            $("body").removeClass("done-processing");
         } else {
             takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
         }
