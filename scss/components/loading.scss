@@ -1,0 +1,22 @@
+
+
+.loading-area {
+    display: none;
+
+    position: fixed;
+    top:0;right:0;bottom:0;left:0;
+    z-index: 200; // above photo area, below popup
+    & > div { // classes (.p-0, .p-1, ...) are changed through js!
+        height: 100%;
+        width: 100%;
+        & > .w {
+            position: absolute;
+            text-align: center;
+            font-family: "Verdana";
+        }
+    }
+}
+
+.has-taken-photo .loading-area {
+    display: block;
+}

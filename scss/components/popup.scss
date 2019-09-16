@@ -6,12 +6,14 @@
     &.popup-area--open {
         opacity: 1;
         //display: block;
-        transition: opacity 0.49s 0.01, display 0s 0.0s;
+        transition: opacity 0.49s 0.01s, display 0s 0.0s;
 
         .popup-container .box--popup {
             transform: translate(0, 0);
         }
     }
+
+
 
     .popup-area-bg {
         position: fixed;
@@ -24,8 +26,6 @@
         left: 50%;
         z-index: 1001;
         transform: translate(-50%, -50%);
-
-
         .box--popup {
             //max-height: 80vh;
             overflow-y: scroll;
