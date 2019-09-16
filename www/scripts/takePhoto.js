@@ -76,19 +76,72 @@
 
     function onProcessDone(obj) {
         console.log(obj);
-        PopupControl($(".popup-area"))
-            .setTitleAndText("", obj.text)
-            .open()
-            .onClose(function() {
-                $("body").removeClass("has-taken-photo")
-            });
+
+        // PopupControl($(".popup-area"))
+        //     .setTitleAndText("", obj.text)
+        //     .open()
+        //     .onClose(function() {
+        //         $("body").removeClass("has-taken-photo")
+        //     });
+
+        var $results = $(".photo-display .result-display");
+        var $videoStream = $("#video-live-display");
+
+        var v_w = $videoStream[0].videoWidth;
+        var v_h = $videoStream[0].videoHeight;
+        var s_w = $videoStream.width();
+        var s_h = $videoStream.height();
+
+
+        var v_to_s_factor;
+        if (v_w/v_h > s_w/s_h) { // stripes above and below
+            var n_h = s_w / (v_w / v_h);
+            var n_t = (s_h - n_h) / 2.0;
+            v_to_s_factor = s_w / v_w;
+
+            $results.css("top", n_t + "px");
+            $results.css("width", "100%");
+            $results.css("height", n_h + "px");
+        } else { // stripes left and right
+            var n_w = s_h / (v_h / v_w);
+            var n_l = (s_w - n_w) / 2.0;
+            v_to_s_factor = s_h / v_h;
+
+            $results.css("left", n_l + "px");
+            $results.css("height", "100%");
+            $results.css("width", n_w + "px");
+        }
+
+        // Add bounding box for each word
+        var html = "";
+        for (var w = 0; w < obj.words.length; w++) {
+            var word = obj.words[w];
+            var text = word.text;
+
+            var b = word.bbox;
+            var b_l = 100.0 * b.x0 / v_w;
+            var b_t = 100.0 * b.y0 / v_h;
+            var b_w = 100.0 * (b.x1-b.x0) / v_w;
+            var b_h = 100.0 * (b.y1-b.y0) / v_h;
+
+            if (b_h >= 100 && b_w >= 100) {
+                continue;
+            }
+
+            var opacity = 0.4 + (0.6 * word.confidence / 100.0);
+            html += '<div class="bbox" style="left: '+ b_l +'%; top: '+ b_t +'%; width: '+ b_w +'%; height: '+ b_h +'%; opacity: '+ opacity +'; font-size: ' + (word.font_size*v_to_s_factor*0.85) + 'px; ' + ((word.is_bold) ? "font-weight: bold;" : "") + '"><span>'+ text +'</span></div>';
+        }
+
+        $results.html(html);
+
         $("body").addClass("done-processing");
     }
 
     function preprocessPhoto(imageData) {
         imageData = CanvasHelper.grayscaleImage(imageData);
-        imageData = CanvasHelper.contrastImage(imageData, 50);
-        imageData = CanvasHelper.lightenImage(imageData, 80);
+        imageData = CanvasHelper.contrastImage(imageData, 40);
+        imageData = CanvasHelper.lightenImage(imageData, 65);
+
         return imageData;
     }
 
@@ -104,6 +157,7 @@
     }
 
     $(document).ready(function() {
+
         checkCompatibility($("#video-live-display")[0]);
         Loading.init($(".loading-area > div"));
         $("#photo-take").click(function(){onTakePhotoButtonClick()});

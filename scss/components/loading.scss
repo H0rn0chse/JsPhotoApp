@@ -28,7 +28,7 @@ $w_min_dist-y: 2%;
         & > .w {
             animation: rainbow-colors 3s linear infinite;
             opacity: 0;
-            transition: opacity 0.8s ease-in;
+            transition: opacity 1.2 ease-in;
             position: absolute;
 
             transform: translate(-50%, -50%);
@@ -67,6 +67,10 @@ $w_min_dist-y: 2%;
 
 .has-taken-photo .loading-area {
     display: block;
+}
+.done-processing .loading-area {
+    transition: display 0s 1.2s;
+    display: none;
 }
 
 html body.done-processing .loading-area  > div.p-100 > .w {
