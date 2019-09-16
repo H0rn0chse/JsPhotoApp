@@ -1,19 +1,53 @@
 
+$w_num: 74;
+$w_min_dist: 8%;
 
 .loading-area {
     display: none;
 
     position: fixed;
     top:0;right:0;bottom:0;left:0;
-    z-index: 200; // above photo area, below popup
+    z-index: 200; // above photo area, below menu and popup
     & > div { // classes (.p-0, .p-1, ...) are changed through js!
         height: 100%;
         width: 100%;
         & > .w {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
             position: absolute;
-            text-align: center;
+
+            transform: translate(-50%, -50%);
+
             font-family: "Verdana";
+            font-size: 3.5vw;
+            font-weight: bold;
+
+            color: #fff;
+            text-shadow: #fff 0 0 10px, #fff 0 0 5px;
+
+            @for $w from 1 to $w_num+1 {
+                &:nth-child(#{$w}) {
+                    top: $w_min_dist + random(100 - 2*$w_min_dist);
+                    left: $w_min_dist + random(100 - 2*$w_min_dist);
+                }
+            }
         }
+
+        @for $p from 0 to 100 {
+            $cur_p_in_w_units: $w_num * $p / 100;
+            &.p-#{$p} {
+                @for $w from 1 to $w_num+1 {
+                    & > .w:nth-child(#{$w}) {
+                        content: "#{$w}";
+                        @if $w >= $cur_p_in_w_units and $w - 1 < $cur_p_in_w_units {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }
 

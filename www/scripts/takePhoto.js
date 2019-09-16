@@ -41,7 +41,7 @@
         window.photo = photo;
         TesseractWorker.loadImage(photo, function(obj){onProcessProgress(obj)}, function(obj){onProcessDone(obj)});
 
-        Loading.init($(".loading-area > div"));
+        Loading.reset();
 
         $(".photo-display").css("background-image", "url("+photo+")");
     }
@@ -49,7 +49,6 @@
     function onProcessProgress(obj) {
         if (obj.status === "recognizing text") {
             var prog = Math.round(obj.progress * 100);
-            console.log(prog);
             Loading.update(prog);
         }
     }
@@ -83,6 +82,7 @@
 
     $(document).ready(function() {
         checkCompatibility($("#video-live-display")[0]);
+        Loading.init($(".loading-area > div"));
         $("#photo-take").click(function(){onTakePhotoButtonClick()});
     });
 
