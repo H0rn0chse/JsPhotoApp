@@ -1,6 +1,7 @@
 
 $w_num: 74;
-$w_min_dist: 8%;
+$w_min_dist-x: 6%;
+$w_min_dist-y: 2%;
 
 
 @keyframes rainbow-colors {
@@ -41,8 +42,8 @@ $w_min_dist: 8%;
 
             @for $w from 1 to $w_num+1 {
                 &:nth-child(#{$w}) {
-                    top: $w_min_dist + random(100 - 2*$w_min_dist);
-                    left: $w_min_dist + random(100 - 2*$w_min_dist);
+                    top: $w_min_dist_y + random(100 - 2*$w_min_dist_y);
+                    left: $w_min_dist_x + random(100 - 2*$w_min_dist_x);
                 }
             }
         }
@@ -66,6 +67,10 @@ $w_min_dist: 8%;
 
 .has-taken-photo .loading-area {
     display: block;
+}
+
+html body.done-processing .loading-area  > div.p-100 > .w {
+    opacity: 0;
 }
 
 @keyframes spin {

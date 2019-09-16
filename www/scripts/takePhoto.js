@@ -47,29 +47,30 @@
     }
 
     function onProcessProgress(obj) {
-        console.log(obj.status + ": " + obj.progress);
 
         var stati = [
-            ["loading tesseract core", 0.1],
-            ["initializing tesseract", 0.1],
-            ["initialized tesseract", 0.1],
-            ["loading language traineddata", 0.1],
-            ["loaded language traineddata", 0.1],
-            ["initializing api", 0.1],
-            ["recognizing text", 0.4]
+            ["loading tesseract core", 0.08],
+            ["initializing tesseract", 0.07],
+            ["initialized tesseract", 0.05],
+            ["loading language traineddata", 0.06],
+            ["loaded language traineddata", 0.06],
+            ["initializing api", 0.07],
+            ["recognizing text", 0.61]
         ];
 
         prog = 0;
         var s = 0;
         for (s = 0; s < stati.length; s++) {
+
             if (stati[s][0] === obj.status) {
                 break;
             }
             prog += stati[s][1];
         }
 
-        prog = Math.round(prog + stati[s][1] * obj.progress * 100);
+        prog = Math.round((prog + stati[s][1] * obj.progress) * 100);
         Loading.update(prog);
+        console.log(prog);
 
     }
 
