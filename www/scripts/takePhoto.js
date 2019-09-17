@@ -41,7 +41,7 @@
         window.photo = photo;
         TesseractWorker.loadImage(photo, function(obj){onProcessProgress(obj)}, function(obj){onProcessDone(obj)});
 
-        Loading.reset();
+        ProgressBar.reset();
 
         $(".photo-display").css("background-image", "url("+photo+")");
     }
@@ -69,7 +69,7 @@
         }
 
         prog = Math.round((prog + stati[s][1] * obj.progress) * 100);
-        Loading.update(prog);
+        ProgressBar.update(prog);
         console.log(prog);
 
     }
@@ -83,6 +83,8 @@
         //     .onClose(function() {
         //         $("body").removeClass("has-taken-photo")
         //     });
+
+        ProgressBar.reset();
 
         var $results = $(".photo-display .result-display");
         var $videoStream = $("#video-live-display");
@@ -148,6 +150,7 @@
     function onTakePhotoButtonClick() {
         if ($("body").hasClass("has-taken-photo")) {
             TesseractWorker.stop();
+            ProgressBar.reset();
             $("body").removeClass("done-processing");
         } else {
             takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
@@ -159,8 +162,12 @@
     $(document).ready(function() {
 
         checkCompatibility($("#video-live-display")[0]);
-        Loading.init($(".loading-area > div"));
+        ProgressBar.init($(".loading-area > div"));
         $("#photo-take").click(function(){onTakePhotoButtonClick()});
+
+        if (Math.random() < 0.005) {
+            ProgressBar = Loading;
+        }
     });
 
 })()

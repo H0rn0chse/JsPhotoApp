@@ -12,13 +12,98 @@ $w_min_dist-y: 2%;
             text-shadow: $col 0 0 10px, $col 0 0 5px;
         }
     }
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
+@keyframes marque-blink {
+    $col: #fff;
+    @for $i from 0 to 20 {
+        #{$i*5}% {
+            @include linear-gradient(85deg,
+                rgba($col, 0) $i*5% - 10,
+                rgba($col, 0.2) $i*5%,
+                rgba($col, 0) $i*5% + 10
+            );
+        }
+    }
+}
+
+
+
+.progress__container {
+    height: 5vh;
+    width: 90vw;
+    margin: 5vh auto;
+
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0, 0.25), 0 1px rgba(255,255,255, 0.08);
+    position: relative;
+    .progress__bar {
+        width: 0; min-width: 12px;
+
+        position: absolute;
+        z-index: 200;
+        overflow: hidden;
+        height: 5vh;
+        border-radius: 6px;
+        @include linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.05) 100%
+        );
+        transition: 0.4s linear;
+        transition-property: width, background-color;
+        box-shadow: 0 0 1px 1px rgba(0,0,0, 0.25), inset 0 1px rgba(255,255,255, 0.1), inset -10px 0 4px 0 rgba(255,255,255, 0.3);
+
+    }
+    .progress__bar:before {
+        content: "";
+        position: absolute;
+        z-index: 202;
+        left:0;top:0;bottom:0;right:0;
+        animation: marque-blink 2s alternate infinite;
+    }
+
+    .progress__bar:after {
+        content: "";
+        position: absolute;
+        z-index: 201;
+        left:0;top:0;bottom:0;
+        width: 90vw;
+        @include linear-gradient(to right,
+            transparentize(hsl(0*36deg, 100%, 50%), 0.7) 0%,
+            transparentize(hsl(1*36deg, 100%, 50%), 0.7) 10%,
+            transparentize(hsl(2*36deg, 100%, 50%), 0.7) 20%,
+            transparentize(hsl(3*36deg, 100%, 50%), 0.7) 30%,
+            transparentize(hsl(4*36deg, 100%, 50%), 0.7) 40%,
+            transparentize(hsl(5*36deg, 100%, 50%), 0.7) 50%,
+            transparentize(hsl(6*36deg, 100%, 50%), 0.7) 60%,
+            transparentize(hsl(7*36deg, 100%, 50%), 0.7) 70%,
+            transparentize(hsl(8*36deg, 100%, 50%), 0.7) 80%,
+            transparentize(hsl(9*36deg, 100%, 50%), 0.7) 90%,
+            transparentize(hsl(10*36deg, 100%, 50%), 0.7) 100%,
+        );
+    }
 
 }
+
+@for $i from 0 through 100 {
+    .p-#{$i} .pb {
+        width: $i*1%;
+    }
+}
+
 
 
 .loading-area {
     display: none;
-
     position: fixed;
     top:0;right:0;bottom:0;left:0;
     z-index: 200; // above photo area, below menu and popup
