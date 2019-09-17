@@ -151,6 +151,7 @@
         if ($("body").hasClass("has-taken-photo")) {
             TesseractWorker.stop();
             ProgressBar.reset();
+            $(".photo-display .result-display").html("");
             $("body").removeClass("done-processing");
         } else {
             takePhoto($("#video-live-display")[0], $("#photo-take-cache")[0])
