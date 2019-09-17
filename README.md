@@ -6,7 +6,11 @@ A small web app to test mobile camera control using `navigator.mediaDevices.getU
 
 
 ## Start Node server
-A Node.js server is used as a web server and as a development environment. Call the following to start the the server locally:
+A Node.js server is used as a web server and as a development environment.
+To download all dependencies, please call
+``npm install``
+
+Call the following to start the the server locally:
 
 ``npm start``
 
