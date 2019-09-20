@@ -163,12 +163,14 @@
     $(document).ready(function() {
 
         checkCompatibility($("#video-live-display")[0]);
-        ProgressBar.init($(".loading-area > div"));
+
         $("#photo-take").click(function(){onTakePhotoButtonClick()});
+
 
         if (Math.random() < 0.005) {
             ProgressBar = Loading;
         }
+        ProgressBar.init($(".loading-area > div"));
     });
 
 })()
