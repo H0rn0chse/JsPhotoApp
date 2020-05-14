@@ -24,7 +24,7 @@
     "server": "^1.0.19"
   },
   "devDependencies": {
-    "concurrently": "^4.1.2",
-    "node-sass": "^4.13.1"
+    "concurrently": "^5.2.0",
+    "node-sass": "^4.14.1"
   }
 }
